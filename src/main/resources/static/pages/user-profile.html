@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя - Social AI Network</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="nav">
+            <h2>Social AI Network</h2>
+            <div class="nav-links">
+                <a href="/profile">🏠 Лента</a>
+                <a href="/my-posts">📝 Мои посты</a>
+                <a href="/daily">🤖 Вопрос дня</a>
+                <a href="/search">🔍 Найти друзей</a>
+            </div>
+            <button class="logout-btn" onclick="logout()">Выйти</button>
+        </div>
+    </div>
+</div>
+
+<div class="container main-layout">
+    <div class="sidebar">
+        <div class="profile-card" id="otherProfileCard">
+            <div class="avatar-container">
+                <div class="avatar">
+                    <span id="otherAvatarText">👤</span>
+                    <img id="otherAvatarImage" style="display: none;">
+                </div>
+            </div>
+            <h3 class="profile-name" id="otherName">Загрузка...</h3>
+            <div class="profile-username" id="otherUsername">@username</div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="otherFollowers">0</div>
+                    <div class="stat-label">подписчиков</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="otherFollowing">0</div>
+                    <div class="stat-label">подписок</div>
+                </div>
+            </div>
+            <button id="followActionBtn" class="follow-btn" onclick="toggleFollow()">Подписаться</button>
+            <div class="profile-info">
+                <div class="info-item">
+                    <div class="info-label">📝 О себе</div>
+                    <div class="info-value" id="otherBio">-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">🎯 Интересы</div>
+                    <div class="info-value" id="otherInterests">-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">💼 Деятельность</div>
+                    <div class="info-value" id="sidebarActivity">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-area">
+        <div id="pageContent">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Загрузка постов...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/common.js"></script>
+<script src="/js/user-profile.js"></script>
+</body>
+</html>

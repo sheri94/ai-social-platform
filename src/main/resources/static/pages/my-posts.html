@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои посты - Social AI Network</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="nav">
+            <h2>Social AI Network</h2>
+            <div class="nav-links">
+                <a href="/profile">🏠 Лента</a>
+                <a href="/my-posts">📝 Мои посты</a>
+                <a href="/daily">🤖 Вопрос дня</a>
+                <a href="/search">🔍 Найти друзей</a>
+            </div>
+            <button class="logout-btn" onclick="logout()">Выйти</button>
+        </div>
+    </div>
+</div>
+
+<div class="container main-layout">
+    <div class="sidebar">
+        <div class="profile-card">
+            <div class="avatar-container">
+                <div class="avatar" onclick="goToMyProfile()">
+                    <span id="sidebarAvatarText">👤</span>
+                    <img id="sidebarAvatarImage" style="display: none;">
+                </div>
+                <label for="photoUpload" class="upload-btn">📷</label>
+                <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+            </div>
+            <h3 class="profile-name" id="sidebarName">Загрузка...</h3>
+            <div class="profile-username" id="sidebarUsername">@username</div>
+            <div class="stats">
+                <div class="stat-item" onclick="showFollowers()">
+                    <div class="stat-number" id="sidebarFollowers">0</div>
+                    <div class="stat-label">подписчиков</div>
+                </div>
+                <div class="stat-item" onclick="showFollowing()">
+                    <div class="stat-number" id="sidebarFollowing">0</div>
+                    <div class="stat-label">подписок</div>
+                </div>
+            </div>
+            <!--            <div class="profile-buttons">-->
+            <!--                <button onclick="showFollowers()" class="profile-action-btn">👥 Подписчики</button>-->
+            <!--                <button onclick="showFollowing()" class="profile-action-btn">📋 Подписки</button>-->
+            <!--            </div>-->
+            <div class="profile-info">
+                <div class="info-item">
+                    <div class="info-label">📝 О себе</div>
+                    <div class="info-value" id="sidebarBio">-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">🎯 Интересы</div>
+                    <div class="info-value" id="sidebarInterests">-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">💼 Деятельность</div>
+                    <div class="info-value" id="sidebarActivity">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-area">
+        <div id="pageContent">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Загрузка постов...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="create-post-btn" onclick="window.location.href='daily.html'">✏️</button>
+
+<script src="/js/common.js"></script>
+<script src="/js/load-photo.js"></script>
+<script src="/js/my-posts.js"></script>
+</body>
+</html>

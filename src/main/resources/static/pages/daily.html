@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вопрос дня - Social AI Network</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        /* Дополнительные стили для редактора поста */
+        .post-editor {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .post-editor h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .post-preview {
+            background: #f9f9f9;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .post-preview-content {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            white-space: pre-wrap;
+        }
+
+        .edit-post-textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 150px;
+            margin-bottom: 15px;
+        }
+
+        .photo-preview {
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .photo-preview img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+        }
+
+        .editor-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .publish-btn {
+            flex: 1;
+            padding: 12px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .cancel-btn {
+            flex: 1;
+            padding: 12px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .attach-photo-btn {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background 0.2s;
+        }
+
+        .attach-photo-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .ai-badge-small {
+            display: inline-block;
+            background: #e8e8ff;
+            color: #667eea;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="nav">
+            <h2>Social AI Network</h2>
+            <div class="nav-links">
+                <a href="/profile">🏠 Лента</a>
+                <a href="/my-posts">📝 Мои посты</a>
+                <a href="/daily">🤖 Вопрос дня</a>
+                <a href="/search">🔍 Найти друзей</a>
+            </div>
+            <button class="logout-btn" onclick="logout()">Выйти</button>
+        </div>
+    </div>
+</div>
+
+<div class="container main-layout">
+    <!-- ЛЕВАЯ ПАНЕЛЬ -->
+    <div class="sidebar">
+        <div class="profile-card">
+            <div class="avatar-container">
+                <div class="avatar" onclick="goToMyProfile()">
+                    <span id="sidebarAvatarText">👤</span>
+                    <img id="sidebarAvatarImage" style="display: none;">
+                </div>
+                <label for="photoUpload" class="upload-btn">📷</label>
+                <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+            </div>
+            <h3 class="profile-name" id="sidebarName">Загрузка...</h3>
+            <div class="profile-username" id="sidebarUsername">@username</div>
+            <div class="stats">
+                <div class="stat-item" onclick="showFollowers()">
+                    <div class="stat-number" id="sidebarFollowers">0</div>
+                    <div class="stat-label">подписчиков</div>
+                </div>
+                <div class="stat-item" onclick="showFollowing()">
+                    <div class="stat-number" id="sidebarFollowing">0</div>
+                    <div class="stat-label">подписок</div>
+                </div>
+            </div>
+            <div class="profile-info">
+                <div class="info-item">
+                    <div class="info-label">📝 О себе</div>
+                    <div class="info-value" id="sidebarBio">-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">🎯 Интересы</div>
+                    <div class="info-value" id="sidebarInterests">-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">💼 Деятельность</div>
+                    <div class="info-value" id="sidebarActivity">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ПРАВАЯ ПАНЕЛЬ -->
+    <div class="content-area">
+        <!-- Карточка вопроса -->
+        <div class="question-card">
+            <div class="ai-header">
+                <div class="ai-icon">🤖</div>
+                <h2>Вопрос дня</h2>
+                <p>Ответь честно, ИИ поможет создать пост!</p>
+            </div>
+
+            <div class="question-text" id="questionText">
+                Загрузка вопроса...
+            </div>
+
+            <button id="refreshQuestionBtn" class="refresh-question-btn" onclick="refreshQuestion()">
+                🔄 Сменить вопрос
+            </button>
+
+            <div class="answer-area">
+                <textarea id="answer" placeholder="Напиши свой ответ здесь..." rows="5"></textarea>
+            </div>
+
+            <button class="submit-btn" onclick="generatePostPreview()">
+                ✨ Создать черновик поста ✨
+            </button>
+        </div>
+
+        <!-- Редактор поста -->
+        <div class="post-editor" id="postEditor">
+            <h3>📝 Редактор поста</h3>
+            <div class="ai-badge-small" id="aiQuestionDisplay"></div>
+
+            <div class="post-preview">
+                <div class="post-preview-content" id="postPreview"></div>
+            </div>
+
+            <textarea id="editPostContent" class="edit-post-textarea" placeholder="Отредактируй пост..."></textarea>
+
+            <div>
+                <button class="attach-photo-btn" onclick="attachPhotoToPost()">📷 Прикрепить фото</button>
+                <input type="file" id="postPhotoInput" accept="image/*" style="display: none;">
+            </div>
+
+            <div class="photo-preview" id="postPhotoPreview"></div>
+
+            <div class="editor-buttons">
+                <button class="cancel-btn" onclick="cancelPost()">Отмена</button>
+                <button class="publish-btn" onclick="publishPost()">📢 Опубликовать</button>
+            </div>
+        </div>
+
+        <div id="message" class="message"></div>
+    </div>
+</div>
+
+<script src="/js/common.js"></script>
+<script src="/js/load-photo.js"></script>
+<script src="/js/daily.js"></script>
+</body>
+</html>
