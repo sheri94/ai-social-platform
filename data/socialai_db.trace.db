@@ -5,3 +5,9 @@ update users set activity=?,bio=?,created_at=?,full_name=?,interests=?,password=
 2026-06-11 14:55:28.817187+05:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
 The object is already closed [90007-224]
+2026-06-11 19:22:40.782618+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]
+2026-06-11 19:25:23.589671+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
+The object is already closed [90007-224]

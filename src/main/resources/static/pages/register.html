@@ -163,7 +163,7 @@
         </form>
 
         <div class="login-link">
-            Уже есть аккаунт? <a href="login.html">Войти</a>
+            Уже есть аккаунт? <a href="login">Войти</a>
         </div>
     </div>
 </div>
@@ -197,7 +197,7 @@
                 document.getElementById('errorMessage').style.display = 'none';
 
                 setTimeout(() => {
-                    window.location.href = 'login.html';
+                    window.location.href = 'login';
                 }, 2000);
             } else {
                 const error = await response.json();
